@@ -18,6 +18,9 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
+    meta: {
+      title: '首页'
+    },
     // component: Home
     component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
     children: [
@@ -35,6 +38,9 @@ const routes = [
   {
     path: '/about',
     name: 'About',
+    meta: {
+      title: '关于'
+    },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -43,12 +49,18 @@ const routes = [
   {
     path: '/user/:userId',
     name: 'user',
+    meta: {
+      title: '用户'
+    },
     // component: User
     component: () => import(/* webpackChunkName: "user" */ '../views/User.vue')
   },
   {
     path: '/profile',
     name: 'profile',
+    meta: {
+      title: '档案'
+    },
     component: Profile
   }
 ]
@@ -59,6 +71,11 @@ const router = new VueRouter({
   routes,
   // 为全局的router-link标签的active-class改变默认的激活样式
   linkActiveClass: 'active'
+})
+
+router.beforeEach((to, from, next) => {
+  document.title = to.matched[0].meta.title;
+  next();
 })
 // 3.导出router对象，并传入到Vue实例中
 export default router
