@@ -20,5 +20,17 @@ export default {
   // components: {
   //   HelloWorld
   // }
+  created() {
+    console.log('created');
+  },
+  // 这两个函数只有该组件被保持了状态，使用了keep-alive时，才是有效的
+  activated() {
+    this.$router.push(this.path);
+  },
+  beforeRouteLeave(to, from, next){
+    console.log(this.$route.path);
+    this.path = this.$route.path;
+    next();
+  }
 }
 </script>

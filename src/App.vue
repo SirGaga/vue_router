@@ -15,7 +15,13 @@
       <button @click="userClick">用户</button>
       <button @click="profileClick">档案</button>
     </div>
-    <router-view/>
+    <!-- keep-alive中有两个重要属性： -->
+    <!-- include-字符串或正则表达式，只有匹配的组件才会被缓存 -->
+    <!-- exclude-字符串或正则表达式，任何匹配的组件都不会被缓存 -->
+    <keep-alive exclude="Profile">
+      <router-view/>
+    </keep-alive>
+
   </div>
 </template>
 <script>
